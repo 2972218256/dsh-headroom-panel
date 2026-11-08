@@ -150,3 +150,13 @@ DSH 退出而消失；WMI 不可用时回退为普通 detached spawn。
 - 只有 `host`：客户端 bundle 没加载（检查 `dsh.client` 声明/包名/重启）。
 - `host` + `client`：bundle 已加载，若仍看不到入口，则是 UI 注册失败（看浏览器 Console）。
 - 都没有：bundle 根本没被 DSH 加载（检查 profile bundles 与 node_modules）。
+
+## 入口：左侧导航（系统级）
+
+Headroom 的路由/压缩是**全局**配置（配置一次，之后所有会话/模型都走它），所以主入口放在
+**左侧导航栏**（与「插件」「上下文洞察」「识图」同一机制）：
+
+- `sidebar.panellist` 槽位注册图标 + 名称 **Headroom**（默认 order 88）
+- `main` 槽位注册同名页面，点开后是整页配置界面
+
+只有当左侧导航注册失败时，才会退化为页面右下角的悬浮按钮（兜底）。
