@@ -1,0 +1,54 @@
+{
+  "name": "dsh-headroom-panel",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness 插件：在右侧边栏查看与配置本机 headroom 代理（状态、节省统计、路由开关、模式/上游/端口、重启代理）。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "docs"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/client.js",
+    "smoke": "node scripts/smoke-test.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "headroom",
+    "proxy",
+    "context-compression",
+    "dashboard"
+  ],
+  "author": "st.zhang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2972218256/dsh-headroom-panel.git"
+  },
+  "homepage": "https://github.com/2972218256/dsh-headroom-panel#readme",
+  "bugs": {
+    "url": "https://github.com/2972218256/dsh-headroom-panel/issues"
+  }
+}

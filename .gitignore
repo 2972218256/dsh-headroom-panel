@@ -1,0 +1,10 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# deps
+node_modules/
+
+# logs / local junk
+*.log
+*.tmp

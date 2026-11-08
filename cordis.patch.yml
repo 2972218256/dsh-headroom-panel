@@ -1,0 +1,9 @@
+# dsh-headroom-panel bundle patch.
+#
+# The profile lists "dsh-headroom-panel" in `dsh.profile.bundles`; boot merges this
+# patch, which inserts the host half as a Cordis plugin row. The
+# `dsh.client` declaration in package.json makes the web app additionally load
+# ./lib/client.js in the browser (right-sidebar "Headroom" tab).
+- insert:
+    - id: dsh-headroom-panel
+      name: dsh-headroom-panel
