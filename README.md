@@ -132,3 +132,21 @@ DSH 退出而消失；WMI 不可用时回退为普通 detached spawn。
 
 - headroom `0.43.1` 的 `/dashboard` 页面会 500（上游 bug：`get_dashboard_html(licensed=...)`
   与运行时补丁签名不匹配）。面板里的「原始统计」按钮改为打开 `/stats`（JSON）。
+
+## 入口与排障
+
+**两个入口都会尝试注册**：
+
+1. `dsh-better-sidebar` 的右侧边栏页签（若安装）；
+2. **页面右下角悬浮按钮 `Headroom`**（兜底，不依赖任何侧边栏）。
+
+**加载证据日志**：`~/.headroom/panel-boot.log`
+
+```
+<时间> host pid=12345 {"connection":true}
+<时间> client {"version":"0.1.2","at":...,"ua":"..."}
+```
+
+- 只有 `host`：客户端 bundle 没加载（检查 `dsh.client` 声明/包名/重启）。
+- `host` + `client`：bundle 已加载，若仍看不到入口，则是 UI 注册失败（看浏览器 Console）。
+- 都没有：bundle 根本没被 DSH 加载（检查 profile bundles 与 node_modules）。

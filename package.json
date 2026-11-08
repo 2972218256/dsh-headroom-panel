@@ -1,6 +1,6 @@
 {
   "name": "dsh-headroom-panel",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DeepSeek Harness 插件：在右侧边栏查看与配置本机 headroom 代理（状态、节省统计、路由开关、模式/上游/端口、重启代理）。",
   "type": "module",
   "main": "lib/index.js",
