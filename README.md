@@ -160,3 +160,14 @@ Headroom 的路由/压缩是**全局**配置（配置一次，之后所有会话
 - `main` 槽位注册同名页面，点开后是整页配置界面
 
 只有当左侧导航注册失败时，才会退化为页面右下角的悬浮按钮（兜底）。
+
+## 仪表盘 500 的根因（本机已修复）
+
+`/dashboard` 报 `Internal Server Error` 与插件无关：本机
+`%APPDATA%\Python\Python313\site-packages\usercustomize.py`（Headroom 仪表盘**中文语言包**）
+把 `headroom.dashboard.get_dashboard_html` 包装成了**不接受参数**的 lambda；
+而 headroom `0.43.1` 的 `/dashboard` 路由改为 `get_dashboard_html(licensed=...)` 调用，
+于是抛出 `TypeError: unexpected keyword argument 'licensed'` → 500。
+
+修复：让包装器透传 `*args, **kwargs`（备份 `usercustomize.py.bak-20261108`），重启代理后
+`/dashboard` 与 `/settings` 恢复 200。删除该文件则仪表盘回到英文原版，也能用。
