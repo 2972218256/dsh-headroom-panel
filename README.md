@@ -114,3 +114,21 @@ node scripts/smoke-test.mjs                               # 对真实运行中�
 ## License
 
 MIT
+
+## 与 dsh-better-sidebar 的关系
+
+如果你安装了 [`dsh-better-sidebar`](https://github.com/omdsh-dev/DSH-better-sidebar)（它会接管 DSH 右侧边栏），
+本插件优先通过它的 `ctx.betterSidebar.registerTab()` 注册页签；没有该插件时回退到 DSH 原生
+`sidebarRightTabs`。两种情况下页签都叫 **Headroom**。
+
+## 关于「重启代理」的进程模型
+
+`重启代理` 通过 WMI 创建进程（父进程为 `WmiPrvSE`），而不是作为 DSH 的子进程启动。
+原因：从 DSH 的终端/工具里启动的子进程会继承 DSH 的 Windows job object，DSH 一重启
+这个代理就会被一起杀掉（表现为"DSH 重启后 headroom 没起来"）。WMI 启动的进程不随
+DSH 退出而消失；WMI 不可用时回退为普通 detached spawn。
+
+## 已知问题
+
+- headroom `0.43.1` 的 `/dashboard` 页面会 500（上游 bug：`get_dashboard_html(licensed=...)`
+  与运行时补丁签名不匹配）。面板里的「原始统计」按钮改为打开 `/stats`（JSON）。
